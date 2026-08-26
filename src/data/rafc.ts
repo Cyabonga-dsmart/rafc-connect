@@ -86,9 +86,9 @@ function squad(prefix: string): Player[] {
     "Zwane",
   ];
   return first.map((f, i) => ({
-    name: `${f} ${last[(i + prefix.length) % last.length]}`,
+    name: `${f} ${last[(i + prefix.length) % last.length]!}`,
     number: i + 1,
-    position: positions[i % positions.length],
+    position: positions[i % positions.length]!,
   }));
 }
 
@@ -196,8 +196,8 @@ export function getLeague(slug: string) {
   return leagues.find((l) => l.slug === slug);
 }
 
-export const nextFixture = leagues[2].fixtures[0];
-export const latestResult = leagues[2].results[0];
+export const nextFixture = leagues[2]!.fixtures[0]!;
+export const latestResult = leagues[2]!.results[0]!;
 
 export const allFixtures: (Fixture & { league: string })[] = leagues.flatMap((l) =>
   l.fixtures.map((f) => ({ ...f, league: l.name })),
