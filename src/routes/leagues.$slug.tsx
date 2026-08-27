@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowLeft, Clock, MapPin } from "lucide-react";
+import { ArrowLeft, CalendarDays, Clock, MapPin, Whistle } from "lucide-react";
 
 import { Chip } from "@/components/ui-bits";
 import { getLeague } from "@/data/rafc";
@@ -20,7 +20,7 @@ export const Route = createFileRoute("/leagues/$slug")({
         { title: `${name} — RAFC` },
         {
           name: "description",
-          content: `${name} squad list, upcoming fixtures, recent results, league table and weekly training schedule at Randburg AFC.`,
+          content: `${name} squad list, upcoming fixtures, recent results, league standings and weekly training schedule at Randburg AFC.`,
         },
         { property: "og:title", content: `${name} — RAFC` },
         { property: "og:description", content: `Squad, fixtures, results and training for RAFC ${name}.` },
@@ -32,18 +32,37 @@ export const Route = createFileRoute("/leagues/$slug")({
   component: LeagueDetail,
 });
 
+function initials(name: string) {
+  return name
+    .split(" ")
+    .map((w) => w[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+}
+
 function LeagueDetail() {
   const { league } = Route.useLoaderData();
   const [tab, setTab] = useState<(typeof tabs)[number]>("Squad");
 
   return (
     <div className="pb-6">
-      <header className="relative px-5 pt-8 pb-5" style={{ backgroundImage: "var(--gradient-navy)" }}>
-        <Link to="/leagues" className="inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.14em] text-muted-foreground">
+      <header
+        className="relative px-5 pt-8 pb-6"
+        style={{
+          backgroundImage: `linear-gradient(150deg, ${league.accent} -20%, var(--navy-deep) 75%)`,
+        }}
+      >
+        <Link
+          to="/leagues"
+          className="inline-flex items-center gap-1.5 font-display text-xs uppercase tracking-[0.14em] text-silver/80"
+        >
           <ArrowLeft className="h-4 w-4" /> League hub
         </Link>
         <h1 className="mt-3 text-3xl font-bold uppercase leading-tight">{league.name}</h1>
-        <p className="mt-1 text-sm text-muted-foreground">{league.ageGroup}</p>
+        <p className="mt-1 text-sm text-silver/80">
+          {league.ageGroup} · {league.squad.length} registered players
+        </p>
         <span className="absolute inset-x-0 bottom-0 h-1" style={{ backgroundColor: league.accent }} />
       </header>
 
@@ -69,9 +88,17 @@ function LeagueDetail() {
           <div className="grid grid-cols-2 gap-3">
             {league.squad.map((p) => (
               <div key={p.number} className="surface p-4">
-                <p className="font-display text-3xl font-bold leading-none text-silver/80">
-                  {String(p.number).padStart(2, "0")}
-                </p>
+                <div className="flex items-start justify-between">
+                  <span
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-border font-display text-sm"
+                    style={{ backgroundColor: league.accent }}
+                  >
+                    {initials(p.name)}
+                  </span>
+                  <span className="font-display text-2xl font-bold leading-none text-silver/70">
+                    {String(p.number).padStart(2, "0")}
+                  </span>
+                </div>
                 <p className="mt-3 text-sm font-semibold leading-tight">{p.name}</p>
                 <p className="mt-1 text-[0.7rem] uppercase tracking-[0.12em] text-muted-foreground">{p.position}</p>
               </div>
@@ -84,7 +111,9 @@ function LeagueDetail() {
             {league.fixtures.map((f) => (
               <div key={f.id} className="surface p-5">
                 <div className="flex items-center justify-between">
-                  <span className="font-display text-sm uppercase">{f.date}</span>
+                  <span className="flex items-center gap-1.5 font-display text-sm uppercase">
+                    <CalendarDays className="h-3.5 w-3.5" /> {f.date}
+                  </span>
                   <Chip accent={f.home}>{f.home ? "Home" : "Away"}</Chip>
                 </div>
                 <p className="mt-3 text-lg font-semibold">RAFC vs {f.opponent}</p>
@@ -106,12 +135,17 @@ function LeagueDetail() {
             <div className="space-y-2">
               {league.results.map((r) => {
                 const win = r.scoreFor > r.scoreAgainst;
-                const draw = r.scoreFor === r.scoreAgainst;
+                const loss = r.scoreFor < r.scoreAgainst;
                 return (
-                  <div key={r.id} className="surface flex items-center justify-between p-4">
+                  <div
+                    key={r.id}
+                    className={`surface flex items-center justify-between p-4 ${
+                      win ? "result-win" : loss ? "result-loss" : ""
+                    }`}
+                  >
                     <div>
                       <p className="text-sm font-semibold">RAFC vs {r.opponent}</p>
-                      <p className="mt-0.5 text-xs text-muted-foreground">
+                      <p className="mt-0.5 text-xs text-silver/75">
                         {r.date} · {r.home ? "Home" : "Away"}
                       </p>
                     </div>
@@ -119,7 +153,9 @@ function LeagueDetail() {
                       <span className="font-display text-2xl font-bold">
                         {r.scoreFor}–{r.scoreAgainst}
                       </span>
-                      <Chip accent={win}>{win ? "W" : draw ? "D" : "L"}</Chip>
+                      <span className="font-display text-xs uppercase tracking-[0.14em]">
+                        {win ? "W" : loss ? "L" : "D"}
+                      </span>
                     </div>
                   </div>
                 );
@@ -127,7 +163,7 @@ function LeagueDetail() {
             </div>
 
             <div className="surface overflow-hidden">
-              <p className="eyebrow px-4 pt-4">League table</p>
+              <p className="eyebrow px-4 pt-4">League standings</p>
               <table className="mt-3 w-full text-sm">
                 <thead>
                   <tr className="border-b border-border text-[0.65rem] uppercase tracking-[0.12em] text-muted-foreground">
@@ -171,8 +207,11 @@ function LeagueDetail() {
                   <Chip>{t.time}</Chip>
                 </div>
                 <p className="mt-2 text-sm">{t.focus}</p>
-                <p className="mt-1 flex items-center gap-1.5 text-xs text-muted-foreground">
+                <p className="mt-2 flex items-center gap-1.5 text-xs text-muted-foreground">
                   <MapPin className="h-3 w-3" /> {t.venue}
+                </p>
+                <p className="mt-1 flex items-center gap-1.5 text-xs text-accent">
+                  <Whistle className="h-3 w-3" /> {t.coach}
                 </p>
               </div>
             ))}
