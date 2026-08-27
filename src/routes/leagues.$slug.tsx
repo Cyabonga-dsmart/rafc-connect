@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowLeft, CalendarDays, Clock, MapPin, Whistle } from "lucide-react";
+import { ArrowLeft, CalendarDays, Clock, MapPin, UserRound } from "lucide-react";
 
 import { Chip } from "@/components/ui-bits";
 import { getLeague } from "@/data/rafc";
@@ -211,7 +211,7 @@ function LeagueDetail() {
                   <MapPin className="h-3 w-3" /> {t.venue}
                 </p>
                 <p className="mt-1 flex items-center gap-1.5 text-xs text-accent">
-                  <Whistle className="h-3 w-3" /> {t.coach}
+                  <UserRound className="h-3 w-3" /> {t.coach}
                 </p>
               </div>
             ))}
