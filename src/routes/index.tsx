@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, MapPin, Clock } from "lucide-react";
+import { ArrowRight, CalendarDays, Clock, MapPin } from "lucide-react";
 
 import crest from "@/assets/rafc-crest.png";
 import stadium from "@/assets/hero-stadium.jpg";
@@ -28,7 +28,9 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
-  const training = leagues[2]!.training;
+  const training = leagues[3]!.training;
+  const win = latestResult.scoreFor > latestResult.scoreAgainst;
+  const loss = latestResult.scoreFor < latestResult.scoreAgainst;
 
   return (
     <div className="pb-6">
@@ -49,7 +51,7 @@ function Home() {
             Association FC
           </h1>
           <p className="mt-2 max-w-xs text-sm text-silver/80">
-            Randburg, Johannesburg · Eight leagues, one club. Est. 2024.
+            Randburg, Johannesburg · Eight leagues, one club. Est. 1983.
           </p>
         </div>
       </section>
@@ -64,25 +66,38 @@ function Home() {
                 <Chip>{nextFixture.competition}</Chip>
                 <Chip accent>{nextFixture.home ? "Home" : "Away"}</Chip>
               </div>
-              <div className="mt-4 flex items-center justify-between gap-3">
+
+              <div className="mt-5 flex items-center justify-between gap-3">
                 <div className="flex-1 text-center">
-                  <img src={crest} alt="" loading="lazy" width={1024} height={1024} className="mx-auto h-12 w-12" />
+                  <img src={crest} alt="" loading="lazy" width={1024} height={1024} className="mx-auto h-14 w-14" />
                   <p className="mt-2 font-display text-sm uppercase">RAFC</p>
                 </div>
                 <div className="text-center">
-                  <p className="font-display text-2xl font-bold">{nextFixture.time}</p>
-                  <p className="text-xs text-muted-foreground">{nextFixture.date}</p>
+                  <p className="font-display text-3xl font-bold leading-none">{nextFixture.time}</p>
+                  <p className="mt-1 text-[0.7rem] uppercase tracking-[0.14em] text-muted-foreground">Kick-off</p>
                 </div>
                 <div className="flex-1 text-center">
-                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-secondary font-display text-sm">
-                    {nextFixture.opponent.slice(0, 2).toUpperCase()}
+                  <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-border bg-secondary font-display text-base">
+                    {nextFixture.opponent
+                      .split(" ")
+                      .map((w) => w[0])
+                      .join("")
+                      .slice(0, 3)
+                      .toUpperCase()}
                   </div>
-                  <p className="mt-2 font-display text-sm uppercase">{nextFixture.opponent}</p>
+                  <p className="mt-2 font-display text-sm uppercase leading-tight">{nextFixture.opponent}</p>
                 </div>
               </div>
-              <p className="mt-4 flex items-center gap-1.5 text-xs text-muted-foreground">
-                <MapPin className="h-3.5 w-3.5" /> {nextFixture.venue}
-              </p>
+
+              <div className="mt-5 space-y-1.5 border-t border-border pt-4 text-xs text-muted-foreground">
+                <p className="flex items-center gap-1.5">
+                  <CalendarDays className="h-3.5 w-3.5" /> {nextFixture.date}
+                </p>
+                <p className="flex items-center gap-1.5">
+                  <MapPin className="h-3.5 w-3.5" /> {nextFixture.venue}
+                </p>
+              </div>
+
               <Link
                 to="/fixtures"
                 className="cta-accent mt-4 flex w-full items-center justify-center gap-2 rounded-lg py-3 font-display text-sm uppercase tracking-[0.14em]"
@@ -95,21 +110,27 @@ function Home() {
 
         <section>
           <SectionHeading eyebrow="Full time" title="Latest result" />
-          <div className="surface flex items-center justify-between p-5">
-            <div>
-              <p className="font-display text-lg uppercase">
-                RAFC vs {latestResult.opponent}
-              </p>
-              <p className="mt-1 text-xs text-muted-foreground">
-                {latestResult.date} · {latestResult.competition}
-              </p>
+          <div
+            className={`surface p-5 ${win ? "result-win" : loss ? "result-loss" : ""}`}
+          >
+            <div className="flex items-center justify-between">
+              <Chip>{latestResult.competition}</Chip>
+              <span className="font-display text-xs uppercase tracking-[0.14em]">
+                {win ? "Win" : loss ? "Loss" : "Draw"}
+              </span>
             </div>
-            <div className="text-right">
-              <p className="font-display text-3xl font-bold">
+            <div className="mt-4 flex items-center justify-between">
+              <div>
+                <p className="font-display text-lg uppercase leading-tight">RAFC</p>
+                <p className="font-display text-lg uppercase leading-tight">{latestResult.opponent}</p>
+              </div>
+              <p className="font-display text-4xl font-bold">
                 {latestResult.scoreFor}–{latestResult.scoreAgainst}
               </p>
-              <Chip accent>Win</Chip>
             </div>
+            <p className="mt-4 text-xs text-silver/80">
+              {latestResult.date} · {latestResult.home ? "Home" : "Away"}
+            </p>
           </div>
         </section>
 
@@ -139,37 +160,37 @@ function Home() {
             ))}
           </div>
         </section>
-
-        <section>
-          <SectionHeading eyebrow="Club news" title="Announcements" />
-          <div className="space-y-3">
-            {news.map((n) => (
-              <article key={n.id} className="surface p-5">
-                <div className="flex items-center justify-between">
-                  <Chip>{n.tag}</Chip>
-                  <span className="text-xs text-muted-foreground">{n.date}</span>
-                </div>
-                <h3 className="mt-3 text-lg font-semibold leading-snug">{n.title}</h3>
-                <p className="mt-1.5 text-sm text-muted-foreground">{n.excerpt}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="surface p-5">
-          <p className="eyebrow text-center">Our partners</p>
-          <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
-            {sponsors.map((s) => (
-              <span
-                key={s}
-                className="rounded-md border border-border bg-secondary/60 px-3 py-2 font-display text-[0.7rem] uppercase tracking-[0.12em] text-silver"
-              >
-                {s}
-              </span>
-            ))}
-          </div>
-        </section>
       </div>
+
+      <section className="mt-8">
+        <p className="eyebrow px-5">Our partners</p>
+        <div className="no-scrollbar mt-3 flex gap-2 overflow-x-auto px-5 pb-1">
+          {sponsors.map((s) => (
+            <span
+              key={s}
+              className="shrink-0 whitespace-nowrap rounded-lg border border-border bg-secondary/60 px-4 py-3 font-display text-[0.72rem] uppercase tracking-[0.12em] text-silver"
+            >
+              {s}
+            </span>
+          ))}
+        </div>
+      </section>
+
+      <section className="mt-8 px-5">
+        <SectionHeading eyebrow="Club news" title="Announcements" />
+        <div className="space-y-3">
+          {news.slice(0, 2).map((n) => (
+            <article key={n.id} className="surface p-5">
+              <div className="flex items-center justify-between">
+                <Chip>{n.tag}</Chip>
+                <span className="text-xs text-muted-foreground">{n.date}</span>
+              </div>
+              <h3 className="mt-3 text-lg font-semibold leading-snug">{n.title}</h3>
+              <p className="mt-1.5 text-sm text-muted-foreground">{n.excerpt}</p>
+            </article>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

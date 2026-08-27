@@ -39,6 +39,7 @@ export type Training = {
   time: string;
   focus: string;
   venue: string;
+  coach: string;
 };
 
 export type League = {
@@ -167,20 +168,86 @@ const table: TableRow[] = [
 ];
 
 const training: Training[] = [
-  { day: "Tuesday", time: "17:30 – 19:00", focus: "Possession & pressing", venue: "Randburg Sports Complex" },
-  { day: "Thursday", time: "17:30 – 19:00", focus: "Finishing & set pieces", venue: "Randburg Sports Complex" },
-  { day: "Friday", time: "16:30 – 17:30", focus: "Matchday activation", venue: "Ferndale Astro" },
+  {
+    day: "Tuesday",
+    time: "17:30 – 19:00",
+    focus: "Possession & pressing",
+    venue: "Randburg Sports Complex",
+    coach: "Coach Sizwe Mahlangu",
+  },
+  {
+    day: "Thursday",
+    time: "17:30 – 19:00",
+    focus: "Finishing & set pieces",
+    venue: "Randburg Sports Complex",
+    coach: "Coach Dean Roberts",
+  },
+  {
+    day: "Friday",
+    time: "16:30 – 17:30",
+    focus: "Matchday activation",
+    venue: "Ferndale Astro",
+    coach: "Coach Palesa Dube",
+  },
 ];
 
 const base = [
-  { slug: "rclfa-u6-u12", name: "RCLFA U6–U12", short: "RCLFA Juniors", ageGroup: "Junior development", accent: "oklch(0.508 0.126 148.5)" },
-  { slug: "rclfa-u13-u19", name: "RCLFA U13–U19", short: "RCLFA Youth", ageGroup: "Youth", accent: "oklch(0.62 0.16 235)" },
-  { slug: "championship", name: "Championship", short: "Championship", ageGroup: "Senior men", accent: "oklch(0.75 0.14 85)" },
-  { slug: "gdl-mysafa", name: "GDL MySAFA", short: "GDL MySAFA", ageGroup: "Senior men", accent: "oklch(0.66 0.19 25)" },
-  { slug: "ladies-rclfa", name: "Ladies RCLFA", short: "Ladies RCLFA", ageGroup: "Senior women", accent: "oklch(0.68 0.17 340)" },
-  { slug: "ladies-regional-safa", name: "Ladies Regional SAFA", short: "Ladies Regional", ageGroup: "Senior women", accent: "oklch(0.7 0.15 300)" },
-  { slug: "league-7", name: "League 7", short: "League 7", ageGroup: "Social / 7-a-side", accent: "oklch(0.72 0.13 195)" },
-  { slug: "league-8", name: "League 8", short: "League 8", ageGroup: "Social / 8-a-side", accent: "oklch(0.8 0.1 120)" },
+  {
+    slug: "rclfa-u6-u12",
+    name: "RCLFA Junior",
+    short: "RCLFA Junior",
+    ageGroup: "U6 – U12",
+    accent: "oklch(0.35 0.11 271.5)",
+  },
+  {
+    slug: "rclfa-u13-u19",
+    name: "RCLFA Youth",
+    short: "RCLFA Youth",
+    ageGroup: "U13 – U19",
+    accent: "oklch(0.6 0.17 250)",
+  },
+  {
+    slug: "championship",
+    name: "Championship",
+    short: "Championship",
+    ageGroup: "Senior men",
+    accent: "oklch(0.68 0.11 195)",
+  },
+  {
+    slug: "gdl-mysafa",
+    name: "GDL MySAFA",
+    short: "GDL",
+    ageGroup: "Senior men",
+    accent: "oklch(0.508 0.126 148.5)",
+  },
+  {
+    slug: "ladies-rclfa",
+    name: "Ladies RCLFA",
+    short: "Ladies RCLFA",
+    ageGroup: "Senior women",
+    accent: "oklch(0.55 0.2 300)",
+  },
+  {
+    slug: "ladies-regional-safa",
+    name: "Ladies Regional",
+    short: "Ladies Regional",
+    ageGroup: "Regional SAFA",
+    accent: "oklch(0.68 0.19 350)",
+  },
+  {
+    slug: "league-7",
+    name: "League 7",
+    short: "League 7",
+    ageGroup: "Social 7-a-side",
+    accent: "oklch(0.78 0.16 75)",
+  },
+  {
+    slug: "league-8",
+    name: "League 8",
+    short: "League 8",
+    ageGroup: "Social 8-a-side",
+    accent: "oklch(0.6 0.21 27)",
+  },
 ];
 
 export const leagues: League[] = base.map((l) => ({
@@ -228,7 +295,18 @@ export const news = [
   },
 ];
 
-export const sponsors = ["Randburg Motors", "Kasi Kicks", "Bidvest Fuel", "Highveld Water", "Astro Turf SA"];
+export const sponsors = [
+  "BSC",
+  "Hyundai",
+  "Hirsch's",
+  "Hollywood Foundation",
+  "Euro Steel",
+  "Wimpy",
+  "Afrihost",
+  "Castaways",
+  "Ecopest",
+  "FBS",
+];
 
 export const notifications = [
   {
