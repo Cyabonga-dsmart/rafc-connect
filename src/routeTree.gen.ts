@@ -14,6 +14,8 @@ import { Route as FixturesRouteImport } from './routes/fixtures'
 import { Route as NotificationsRouteImport } from './routes/notifications'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as RegisterRouteImport } from './routes/register'
+import { Route as CoachIndexRouteImport } from './routes/coach.index'
+import { Route as CoachIdRouteImport } from './routes/coach.$id'
 import { Route as LeaguesIndexRouteImport } from './routes/leagues.index'
 import { Route as LeaguesSlugRouteImport } from './routes/leagues.$slug'
 
@@ -42,6 +44,16 @@ const RegisterRoute = RegisterRouteImport.update({
   path: '/register',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CoachIndexRoute = CoachIndexRouteImport.update({
+  id: '/coach/',
+  path: '/coach/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoachIdRoute = CoachIdRouteImport.update({
+  id: '/coach/$id',
+  path: '/coach/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LeaguesIndexRoute = LeaguesIndexRouteImport.update({
   id: '/leagues/',
   path: '/leagues/',
@@ -59,7 +71,9 @@ export interface FileRoutesByFullPath {
   '/notifications': typeof NotificationsRoute
   '/profile': typeof ProfileRoute
   '/register': typeof RegisterRoute
+  '/coach/$id': typeof CoachIdRoute
   '/leagues/$slug': typeof LeaguesSlugRoute
+  '/coach/': typeof CoachIndexRoute
   '/leagues/': typeof LeaguesIndexRoute
 }
 export interface FileRoutesByTo {
@@ -68,7 +82,9 @@ export interface FileRoutesByTo {
   '/notifications': typeof NotificationsRoute
   '/profile': typeof ProfileRoute
   '/register': typeof RegisterRoute
+  '/coach/$id': typeof CoachIdRoute
   '/leagues/$slug': typeof LeaguesSlugRoute
+  '/coach': typeof CoachIndexRoute
   '/leagues': typeof LeaguesIndexRoute
 }
 export interface FileRoutesById {
@@ -78,7 +94,9 @@ export interface FileRoutesById {
   '/notifications': typeof NotificationsRoute
   '/profile': typeof ProfileRoute
   '/register': typeof RegisterRoute
+  '/coach/$id': typeof CoachIdRoute
   '/leagues/$slug': typeof LeaguesSlugRoute
+  '/coach/': typeof CoachIndexRoute
   '/leagues/': typeof LeaguesIndexRoute
 }
 export interface FileRouteTypes {
@@ -89,7 +107,9 @@ export interface FileRouteTypes {
     | '/notifications'
     | '/profile'
     | '/register'
+    | '/coach/$id'
     | '/leagues/$slug'
+    | '/coach/'
     | '/leagues/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -98,7 +118,9 @@ export interface FileRouteTypes {
     | '/notifications'
     | '/profile'
     | '/register'
+    | '/coach/$id'
     | '/leagues/$slug'
+    | '/coach'
     | '/leagues'
   id:
     | '__root__'
@@ -107,7 +129,9 @@ export interface FileRouteTypes {
     | '/notifications'
     | '/profile'
     | '/register'
+    | '/coach/$id'
     | '/leagues/$slug'
+    | '/coach/'
     | '/leagues/'
   fileRoutesById: FileRoutesById
 }
@@ -117,7 +141,9 @@ export interface RootRouteChildren {
   NotificationsRoute: typeof NotificationsRoute
   ProfileRoute: typeof ProfileRoute
   RegisterRoute: typeof RegisterRoute
+  CoachIdRoute: typeof CoachIdRoute
   LeaguesSlugRoute: typeof LeaguesSlugRoute
+  CoachIndexRoute: typeof CoachIndexRoute
   LeaguesIndexRoute: typeof LeaguesIndexRoute
 }
 
@@ -158,6 +184,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RegisterRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/coach/': {
+      id: '/coach/'
+      path: '/coach'
+      fullPath: '/coach/'
+      preLoaderRoute: typeof CoachIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/coach/$id': {
+      id: '/coach/$id'
+      path: '/coach/$id'
+      fullPath: '/coach/$id'
+      preLoaderRoute: typeof CoachIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/leagues/': {
       id: '/leagues/'
       path: '/leagues'
@@ -181,7 +221,9 @@ const rootRouteChildren: RootRouteChildren = {
   NotificationsRoute: NotificationsRoute,
   ProfileRoute: ProfileRoute,
   RegisterRoute: RegisterRoute,
+  CoachIdRoute: CoachIdRoute,
   LeaguesSlugRoute: LeaguesSlugRoute,
+  CoachIndexRoute: CoachIndexRoute,
   LeaguesIndexRoute: LeaguesIndexRoute,
 }
 export const routeTree = rootRouteImport
