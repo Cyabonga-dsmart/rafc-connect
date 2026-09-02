@@ -218,7 +218,7 @@ const base = [
     name: "GDL MySAFA",
     short: "GDL",
     ageGroup: "Senior men",
-    accent: "oklch(0.508 0.126 148.5)",
+    accent: "#2D7D32",
   },
   {
     slug: "ladies-rclfa",

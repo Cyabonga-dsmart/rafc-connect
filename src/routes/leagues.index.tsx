@@ -37,7 +37,12 @@ function LeagueHub() {
             <span className="absolute inset-y-0 left-0 w-1.5" style={{ backgroundColor: l.accent }} />
             <h2 className="text-base font-semibold uppercase leading-tight">{l.name}</h2>
             <div className="flex items-end justify-between gap-2">
-              <p className="text-xs text-muted-foreground">{l.ageGroup}</p>
+              <div className="min-w-0">
+                <p className="text-xs text-muted-foreground">{l.ageGroup}</p>
+                <p className="mt-1 font-display text-[0.7rem] uppercase tracking-[0.12em] text-silver">
+                  {l.squad.length} players
+                </p>
+              </div>
               <ArrowUpRight className="h-4 w-4 shrink-0 text-accent" />
             </div>
           </Link>
