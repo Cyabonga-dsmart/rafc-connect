@@ -107,7 +107,7 @@ function Register() {
   const [step, setStep] = useState(1);
   const [gender, setGender] = useState("Male");
   const [position, setPosition] = useState("Midfielder");
-  const [league, setLeague] = useState(leagues[1]!.slug);
+  const [league, setLeague] = useState(leagues[1]!.name);
   const [docType, setDocType] = useState("SA ID");
   const [relationship, setRelationship] = useState("Mother");
   const [prevClub, setPrevClub] = useState("No");
@@ -181,7 +181,7 @@ function Register() {
             </div>
             <div>
               <span className="eyebrow">League</span>
-              <Chips options={leagues.map((l) => l.slug)} value={league} onChange={setLeague} />
+              <Chips options={leagues.map((l) => l.name)} value={league} onChange={setLeague} />
             </div>
           </div>
         )}
