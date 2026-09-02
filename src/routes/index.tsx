@@ -57,6 +57,21 @@ function Home() {
       </section>
 
       <div className="space-y-8 px-5 pt-6">
+        <section className="grid grid-cols-2 gap-3">
+          <Link
+            to="/register"
+            className="cta-accent flex items-center justify-center gap-2 rounded-lg py-3 font-display text-xs uppercase tracking-[0.14em]"
+          >
+            Register player <ArrowRight className="h-4 w-4" />
+          </Link>
+          <Link
+            to="/coach"
+            className="flex items-center justify-center gap-2 rounded-lg bg-secondary py-3 font-display text-xs uppercase tracking-[0.14em]"
+          >
+            Coach desk <ArrowRight className="h-4 w-4" />
+          </Link>
+        </section>
+
         <section>
           <SectionHeading eyebrow="Next up" title="Upcoming fixture" />
           <div className="surface overflow-hidden">
