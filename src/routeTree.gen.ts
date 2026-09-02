@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as FixturesRouteImport } from './routes/fixtures'
 import { Route as NotificationsRouteImport } from './routes/notifications'
 import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as RegisterRouteImport } from './routes/register'
 import { Route as LeaguesIndexRouteImport } from './routes/leagues.index'
 import { Route as LeaguesSlugRouteImport } from './routes/leagues.$slug'
 
@@ -36,6 +37,11 @@ const ProfileRoute = ProfileRouteImport.update({
   path: '/profile',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RegisterRoute = RegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LeaguesIndexRoute = LeaguesIndexRouteImport.update({
   id: '/leagues/',
   path: '/leagues/',
@@ -52,6 +58,7 @@ export interface FileRoutesByFullPath {
   '/fixtures': typeof FixturesRoute
   '/notifications': typeof NotificationsRoute
   '/profile': typeof ProfileRoute
+  '/register': typeof RegisterRoute
   '/leagues/$slug': typeof LeaguesSlugRoute
   '/leagues/': typeof LeaguesIndexRoute
 }
@@ -60,6 +67,7 @@ export interface FileRoutesByTo {
   '/fixtures': typeof FixturesRoute
   '/notifications': typeof NotificationsRoute
   '/profile': typeof ProfileRoute
+  '/register': typeof RegisterRoute
   '/leagues/$slug': typeof LeaguesSlugRoute
   '/leagues': typeof LeaguesIndexRoute
 }
@@ -69,6 +77,7 @@ export interface FileRoutesById {
   '/fixtures': typeof FixturesRoute
   '/notifications': typeof NotificationsRoute
   '/profile': typeof ProfileRoute
+  '/register': typeof RegisterRoute
   '/leagues/$slug': typeof LeaguesSlugRoute
   '/leagues/': typeof LeaguesIndexRoute
 }
@@ -79,6 +88,7 @@ export interface FileRouteTypes {
     | '/fixtures'
     | '/notifications'
     | '/profile'
+    | '/register'
     | '/leagues/$slug'
     | '/leagues/'
   fileRoutesByTo: FileRoutesByTo
@@ -87,6 +97,7 @@ export interface FileRouteTypes {
     | '/fixtures'
     | '/notifications'
     | '/profile'
+    | '/register'
     | '/leagues/$slug'
     | '/leagues'
   id:
@@ -95,6 +106,7 @@ export interface FileRouteTypes {
     | '/fixtures'
     | '/notifications'
     | '/profile'
+    | '/register'
     | '/leagues/$slug'
     | '/leagues/'
   fileRoutesById: FileRoutesById
@@ -104,6 +116,7 @@ export interface RootRouteChildren {
   FixturesRoute: typeof FixturesRoute
   NotificationsRoute: typeof NotificationsRoute
   ProfileRoute: typeof ProfileRoute
+  RegisterRoute: typeof RegisterRoute
   LeaguesSlugRoute: typeof LeaguesSlugRoute
   LeaguesIndexRoute: typeof LeaguesIndexRoute
 }
@@ -138,6 +151,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/register': {
+      id: '/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/leagues/': {
       id: '/leagues/'
       path: '/leagues'
@@ -160,6 +180,7 @@ const rootRouteChildren: RootRouteChildren = {
   FixturesRoute: FixturesRoute,
   NotificationsRoute: NotificationsRoute,
   ProfileRoute: ProfileRoute,
+  RegisterRoute: RegisterRoute,
   LeaguesSlugRoute: LeaguesSlugRoute,
   LeaguesIndexRoute: LeaguesIndexRoute,
 }
