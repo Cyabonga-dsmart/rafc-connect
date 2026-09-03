@@ -12,11 +12,14 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CoachAccessRouteImport } from './routes/coach-access'
 import { Route as FixturesRouteImport } from './routes/fixtures'
+import { Route as HistoryRouteImport } from './routes/history'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as MysafaRouteImport } from './routes/mysafa'
 import { Route as NotificationsRouteImport } from './routes/notifications'
 import { Route as PendingRouteImport } from './routes/pending'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as RegisterRouteImport } from './routes/register'
+import { Route as SponsorsRouteImport } from './routes/sponsors'
 import { Route as CoachIndexRouteImport } from './routes/coach.index'
 import { Route as CoachIdRouteImport } from './routes/coach.$id'
 import { Route as LeaguesIndexRouteImport } from './routes/leagues.index'
@@ -37,9 +40,19 @@ const FixturesRoute = FixturesRouteImport.update({
   path: '/fixtures',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HistoryRoute = HistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MysafaRoute = MysafaRouteImport.update({
+  id: '/mysafa',
+  path: '/mysafa',
   getParentRoute: () => rootRouteImport,
 } as any)
 const NotificationsRoute = NotificationsRouteImport.update({
@@ -60,6 +73,11 @@ const ProfileRoute = ProfileRouteImport.update({
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
   path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SponsorsRoute = SponsorsRouteImport.update({
+  id: '/sponsors',
+  path: '/sponsors',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CoachIndexRoute = CoachIndexRouteImport.update({
@@ -87,11 +105,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/coach-access': typeof CoachAccessRoute
   '/fixtures': typeof FixturesRoute
+  '/history': typeof HistoryRoute
   '/login': typeof LoginRoute
+  '/mysafa': typeof MysafaRoute
   '/notifications': typeof NotificationsRoute
   '/pending': typeof PendingRoute
   '/profile': typeof ProfileRoute
   '/register': typeof RegisterRoute
+  '/sponsors': typeof SponsorsRoute
   '/coach/$id': typeof CoachIdRoute
   '/leagues/$slug': typeof LeaguesSlugRoute
   '/coach/': typeof CoachIndexRoute
@@ -101,11 +122,14 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/coach-access': typeof CoachAccessRoute
   '/fixtures': typeof FixturesRoute
+  '/history': typeof HistoryRoute
   '/login': typeof LoginRoute
+  '/mysafa': typeof MysafaRoute
   '/notifications': typeof NotificationsRoute
   '/pending': typeof PendingRoute
   '/profile': typeof ProfileRoute
   '/register': typeof RegisterRoute
+  '/sponsors': typeof SponsorsRoute
   '/coach/$id': typeof CoachIdRoute
   '/leagues/$slug': typeof LeaguesSlugRoute
   '/coach': typeof CoachIndexRoute
@@ -116,11 +140,14 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/coach-access': typeof CoachAccessRoute
   '/fixtures': typeof FixturesRoute
+  '/history': typeof HistoryRoute
   '/login': typeof LoginRoute
+  '/mysafa': typeof MysafaRoute
   '/notifications': typeof NotificationsRoute
   '/pending': typeof PendingRoute
   '/profile': typeof ProfileRoute
   '/register': typeof RegisterRoute
+  '/sponsors': typeof SponsorsRoute
   '/coach/$id': typeof CoachIdRoute
   '/leagues/$slug': typeof LeaguesSlugRoute
   '/coach/': typeof CoachIndexRoute
@@ -132,11 +159,14 @@ export interface FileRouteTypes {
     | '/'
     | '/coach-access'
     | '/fixtures'
+    | '/history'
     | '/login'
+    | '/mysafa'
     | '/notifications'
     | '/pending'
     | '/profile'
     | '/register'
+    | '/sponsors'
     | '/coach/$id'
     | '/leagues/$slug'
     | '/coach/'
@@ -146,11 +176,14 @@ export interface FileRouteTypes {
     | '/'
     | '/coach-access'
     | '/fixtures'
+    | '/history'
     | '/login'
+    | '/mysafa'
     | '/notifications'
     | '/pending'
     | '/profile'
     | '/register'
+    | '/sponsors'
     | '/coach/$id'
     | '/leagues/$slug'
     | '/coach'
@@ -160,11 +193,14 @@ export interface FileRouteTypes {
     | '/'
     | '/coach-access'
     | '/fixtures'
+    | '/history'
     | '/login'
+    | '/mysafa'
     | '/notifications'
     | '/pending'
     | '/profile'
     | '/register'
+    | '/sponsors'
     | '/coach/$id'
     | '/leagues/$slug'
     | '/coach/'
@@ -175,11 +211,14 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CoachAccessRoute: typeof CoachAccessRoute
   FixturesRoute: typeof FixturesRoute
+  HistoryRoute: typeof HistoryRoute
   LoginRoute: typeof LoginRoute
+  MysafaRoute: typeof MysafaRoute
   NotificationsRoute: typeof NotificationsRoute
   PendingRoute: typeof PendingRoute
   ProfileRoute: typeof ProfileRoute
   RegisterRoute: typeof RegisterRoute
+  SponsorsRoute: typeof SponsorsRoute
   CoachIdRoute: typeof CoachIdRoute
   LeaguesSlugRoute: typeof LeaguesSlugRoute
   CoachIndexRoute: typeof CoachIndexRoute
@@ -209,11 +248,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FixturesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/history': {
+      id: '/history'
+      path: '/history'
+      fullPath: '/history'
+      preLoaderRoute: typeof HistoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mysafa': {
+      id: '/mysafa'
+      path: '/mysafa'
+      fullPath: '/mysafa'
+      preLoaderRoute: typeof MysafaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/notifications': {
@@ -242,6 +295,13 @@ declare module '@tanstack/react-router' {
       path: '/register'
       fullPath: '/register'
       preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sponsors': {
+      id: '/sponsors'
+      path: '/sponsors'
+      fullPath: '/sponsors'
+      preLoaderRoute: typeof SponsorsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/coach/': {
@@ -279,11 +339,14 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CoachAccessRoute: CoachAccessRoute,
   FixturesRoute: FixturesRoute,
+  HistoryRoute: HistoryRoute,
   LoginRoute: LoginRoute,
+  MysafaRoute: MysafaRoute,
   NotificationsRoute: NotificationsRoute,
   PendingRoute: PendingRoute,
   ProfileRoute: ProfileRoute,
   RegisterRoute: RegisterRoute,
+  SponsorsRoute: SponsorsRoute,
   CoachIdRoute: CoachIdRoute,
   LeaguesSlugRoute: LeaguesSlugRoute,
   CoachIndexRoute: CoachIndexRoute,
