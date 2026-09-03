@@ -208,7 +208,7 @@ const base = [
   },
   {
     slug: "championship",
-    name: "Championship",
+    name: "Championship League",
     short: "Championship",
     ageGroup: "Senior men",
     accent: "#0F766E",
@@ -229,7 +229,7 @@ const base = [
   },
   {
     slug: "ladies-regional-safa",
-    name: "Ladies Regional",
+    name: "Ladies Regional SAFA",
     short: "Ladies Regional",
     ageGroup: "Regional SAFA",
     accent: "#BE185D",
