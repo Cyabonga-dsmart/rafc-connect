@@ -10,8 +10,11 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CoachAccessRouteImport } from './routes/coach-access'
 import { Route as FixturesRouteImport } from './routes/fixtures'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as NotificationsRouteImport } from './routes/notifications'
+import { Route as PendingRouteImport } from './routes/pending'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as CoachIndexRouteImport } from './routes/coach.index'
@@ -24,14 +27,29 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CoachAccessRoute = CoachAccessRouteImport.update({
+  id: '/coach-access',
+  path: '/coach-access',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FixturesRoute = FixturesRouteImport.update({
   id: '/fixtures',
   path: '/fixtures',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const NotificationsRoute = NotificationsRouteImport.update({
   id: '/notifications',
   path: '/notifications',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PendingRoute = PendingRouteImport.update({
+  id: '/pending',
+  path: '/pending',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProfileRoute = ProfileRouteImport.update({
@@ -67,8 +85,11 @@ const LeaguesSlugRoute = LeaguesSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/coach-access': typeof CoachAccessRoute
   '/fixtures': typeof FixturesRoute
+  '/login': typeof LoginRoute
   '/notifications': typeof NotificationsRoute
+  '/pending': typeof PendingRoute
   '/profile': typeof ProfileRoute
   '/register': typeof RegisterRoute
   '/coach/$id': typeof CoachIdRoute
@@ -78,8 +99,11 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/coach-access': typeof CoachAccessRoute
   '/fixtures': typeof FixturesRoute
+  '/login': typeof LoginRoute
   '/notifications': typeof NotificationsRoute
+  '/pending': typeof PendingRoute
   '/profile': typeof ProfileRoute
   '/register': typeof RegisterRoute
   '/coach/$id': typeof CoachIdRoute
@@ -90,8 +114,11 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/coach-access': typeof CoachAccessRoute
   '/fixtures': typeof FixturesRoute
+  '/login': typeof LoginRoute
   '/notifications': typeof NotificationsRoute
+  '/pending': typeof PendingRoute
   '/profile': typeof ProfileRoute
   '/register': typeof RegisterRoute
   '/coach/$id': typeof CoachIdRoute
@@ -103,8 +130,11 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/coach-access'
     | '/fixtures'
+    | '/login'
     | '/notifications'
+    | '/pending'
     | '/profile'
     | '/register'
     | '/coach/$id'
@@ -114,8 +144,11 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/coach-access'
     | '/fixtures'
+    | '/login'
     | '/notifications'
+    | '/pending'
     | '/profile'
     | '/register'
     | '/coach/$id'
@@ -125,8 +158,11 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/coach-access'
     | '/fixtures'
+    | '/login'
     | '/notifications'
+    | '/pending'
     | '/profile'
     | '/register'
     | '/coach/$id'
@@ -137,8 +173,11 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CoachAccessRoute: typeof CoachAccessRoute
   FixturesRoute: typeof FixturesRoute
+  LoginRoute: typeof LoginRoute
   NotificationsRoute: typeof NotificationsRoute
+  PendingRoute: typeof PendingRoute
   ProfileRoute: typeof ProfileRoute
   RegisterRoute: typeof RegisterRoute
   CoachIdRoute: typeof CoachIdRoute
@@ -156,6 +195,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/coach-access': {
+      id: '/coach-access'
+      path: '/coach-access'
+      fullPath: '/coach-access'
+      preLoaderRoute: typeof CoachAccessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/fixtures': {
       id: '/fixtures'
       path: '/fixtures'
@@ -163,11 +209,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FixturesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/notifications': {
       id: '/notifications'
       path: '/notifications'
       fullPath: '/notifications'
       preLoaderRoute: typeof NotificationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pending': {
+      id: '/pending'
+      path: '/pending'
+      fullPath: '/pending'
+      preLoaderRoute: typeof PendingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/profile': {
@@ -217,8 +277,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CoachAccessRoute: CoachAccessRoute,
   FixturesRoute: FixturesRoute,
+  LoginRoute: LoginRoute,
   NotificationsRoute: NotificationsRoute,
+  PendingRoute: PendingRoute,
   ProfileRoute: ProfileRoute,
   RegisterRoute: RegisterRoute,
   CoachIdRoute: CoachIdRoute,
