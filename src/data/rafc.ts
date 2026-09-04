@@ -266,8 +266,12 @@ export function getLeague(slug: string) {
 export const nextFixture = leagues[2]!.fixtures[0]!;
 export const latestResult = leagues[2]!.results[0]!;
 
-export const allFixtures: (Fixture & { league: string })[] = leagues.flatMap((l) =>
-  l.fixtures.map((f) => ({ ...f, league: l.name })),
+export const allFixtures: (Fixture & { league: string; slug: string; accent: string })[] = leagues.flatMap((l) =>
+  l.fixtures.map((f) => ({ ...f, league: l.name, slug: l.slug, accent: l.accent })),
+);
+
+export const allResults: (Result & { league: string; slug: string; accent: string })[] = leagues.flatMap((l) =>
+  l.results.map((r) => ({ ...r, league: l.name, slug: l.slug, accent: l.accent })),
 );
 
 export const news = [
@@ -308,33 +312,128 @@ export const sponsors = [
   "FBS",
 ];
 
-export const notifications = [
+export type NotificationKind = "training" | "match" | "payment" | "news";
+
+export type Notification = {
+  id: string;
+  kind: NotificationKind;
+  title: string;
+  body: string;
+  league: string;
+  accent: string;
+  time: string;
+  unread: boolean;
+};
+
+export const notifications: Notification[] = [
   {
     id: "a1",
+    kind: "match",
     title: "Kick-off moved to 09:30",
     body: "Championship vs Bryanston Bulls on Sat 29 Aug now starts 30 minutes earlier.",
+    league: "Championship League",
+    accent: "#0F766E",
     time: "2h ago",
     unread: true,
   },
   {
     id: "a2",
+    kind: "news",
     title: "Match report: RAFC 3–1 Northcliff",
     body: "Full report and player ratings are live in the news feed.",
+    league: "Championship League",
+    accent: "#0F766E",
     time: "Yesterday",
     unread: true,
   },
   {
     id: "a3",
+    kind: "training",
     title: "Training cancelled — weather",
     body: "Ladies RCLFA Thursday session cancelled due to lightning warnings.",
+    league: "Ladies RCLFA",
+    accent: "#7C3AED",
     time: "3 days ago",
-    unread: false,
+    unread: true,
   },
   {
     id: "a4",
+    kind: "payment",
     title: "Subs reminder",
-    body: "Q3 club subscriptions are due by 31 August.",
+    body: "Q3 club subscriptions of R350 are due by 31 August.",
+    league: "All leagues",
+    accent: "#001039",
     time: "1 week ago",
     unread: false,
   },
+  {
+    id: "a5",
+    kind: "training",
+    title: "Extra Saturday session added",
+    body: "RCLFA Youth keepers meet at Ferndale Astro 08:00 for a specialist session.",
+    league: "RCLFA Youth",
+    accent: "#1D4ED8",
+    time: "1 week ago",
+    unread: false,
+  },
+  {
+    id: "a6",
+    kind: "payment",
+    title: "Proof of payment received",
+    body: "Your registration fee for the 2026 season has been matched and receipted.",
+    league: "GDL MySAFA",
+    accent: "#2D7D32",
+    time: "2 weeks ago",
+    unread: false,
+  },
 ];
+
+export const standings = table;
+
+export const playerProfile = {
+  name: "Thabo Mokoena",
+  preferredName: "Tebza",
+  league: "RCLFA Youth",
+  accent: "#1D4ED8",
+  ageGroup: "U15",
+  appearances: 18,
+  goals: 7,
+  assists: 5,
+  position: "Attacking midfielder",
+  number: 10,
+  school: "Randburg High School",
+  mysafaId: "SAFA-2026-004182",
+  registration: "Registered",
+  payment: "Paid",
+  documents: [
+    { label: "Player photo", done: true },
+    { label: "ID / birth certificate", done: true },
+    { label: "School stamp letter", done: true },
+    { label: "Clearance letter", done: false },
+    { label: "Proof of payment", done: true },
+  ],
+};
+
+export const clubInfo = {
+  address: "Randburg Sports Complex, Hans Schoeman St, Ferndale, Randburg, 2194",
+  mapsUrl: "https://maps.google.com/?q=Randburg+Sports+Complex+Ferndale+Randburg",
+  trainingGround: {
+    name: "Ferndale Astro & Field 3",
+    detail: "Floodlit astro plus two grass pitches. Gates open 16:00 on weekdays.",
+  },
+  email: "info@randburgafc.co.za",
+  phone: "+27 11 789 4410",
+  committee: [
+    { role: "Chairperson", name: "Sizwe Mahlangu" },
+    { role: "Vice chairperson", name: "Dean Roberts" },
+    { role: "Club secretary", name: "Palesa Dube" },
+    { role: "Treasurer", name: "Anita van Wyk" },
+    { role: "Head of youth", name: "Bongani Nkosi" },
+    { role: "Ladies convenor", name: "Kelebogile Sithole" },
+  ],
+  socials: [
+    { label: "Facebook", url: "https://facebook.com/randburgafc" },
+    { label: "Instagram", url: "https://instagram.com/randburgafc" },
+    { label: "Twitter / X", url: "https://x.com/randburgafc" },
+  ],
+};

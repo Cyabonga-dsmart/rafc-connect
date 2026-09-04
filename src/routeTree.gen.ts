@@ -10,13 +10,16 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as CoachAccessRouteImport } from './routes/coach-access'
 import { Route as FixturesRouteImport } from './routes/fixtures'
 import { Route as HistoryRouteImport } from './routes/history'
+import { Route as InfoRouteImport } from './routes/info'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as MysafaRouteImport } from './routes/mysafa'
 import { Route as NotificationsRouteImport } from './routes/notifications'
 import { Route as PendingRouteImport } from './routes/pending'
+import { Route as PlayerRouteImport } from './routes/player'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as SponsorsRouteImport } from './routes/sponsors'
@@ -28,6 +31,11 @@ import { Route as LeaguesSlugRouteImport } from './routes/leagues.$slug'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CoachAccessRoute = CoachAccessRouteImport.update({
@@ -43,6 +51,11 @@ const FixturesRoute = FixturesRouteImport.update({
 const HistoryRoute = HistoryRouteImport.update({
   id: '/history',
   path: '/history',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InfoRoute = InfoRouteImport.update({
+  id: '/info',
+  path: '/info',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -63,6 +76,11 @@ const NotificationsRoute = NotificationsRouteImport.update({
 const PendingRoute = PendingRouteImport.update({
   id: '/pending',
   path: '/pending',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlayerRoute = PlayerRouteImport.update({
+  id: '/player',
+  path: '/player',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProfileRoute = ProfileRouteImport.update({
@@ -103,13 +121,16 @@ const LeaguesSlugRoute = LeaguesSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/coach-access': typeof CoachAccessRoute
   '/fixtures': typeof FixturesRoute
   '/history': typeof HistoryRoute
+  '/info': typeof InfoRoute
   '/login': typeof LoginRoute
   '/mysafa': typeof MysafaRoute
   '/notifications': typeof NotificationsRoute
   '/pending': typeof PendingRoute
+  '/player': typeof PlayerRoute
   '/profile': typeof ProfileRoute
   '/register': typeof RegisterRoute
   '/sponsors': typeof SponsorsRoute
@@ -120,13 +141,16 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/coach-access': typeof CoachAccessRoute
   '/fixtures': typeof FixturesRoute
   '/history': typeof HistoryRoute
+  '/info': typeof InfoRoute
   '/login': typeof LoginRoute
   '/mysafa': typeof MysafaRoute
   '/notifications': typeof NotificationsRoute
   '/pending': typeof PendingRoute
+  '/player': typeof PlayerRoute
   '/profile': typeof ProfileRoute
   '/register': typeof RegisterRoute
   '/sponsors': typeof SponsorsRoute
@@ -138,13 +162,16 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/coach-access': typeof CoachAccessRoute
   '/fixtures': typeof FixturesRoute
   '/history': typeof HistoryRoute
+  '/info': typeof InfoRoute
   '/login': typeof LoginRoute
   '/mysafa': typeof MysafaRoute
   '/notifications': typeof NotificationsRoute
   '/pending': typeof PendingRoute
+  '/player': typeof PlayerRoute
   '/profile': typeof ProfileRoute
   '/register': typeof RegisterRoute
   '/sponsors': typeof SponsorsRoute
@@ -157,13 +184,16 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
     | '/coach-access'
     | '/fixtures'
     | '/history'
+    | '/info'
     | '/login'
     | '/mysafa'
     | '/notifications'
     | '/pending'
+    | '/player'
     | '/profile'
     | '/register'
     | '/sponsors'
@@ -174,13 +204,16 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/admin'
     | '/coach-access'
     | '/fixtures'
     | '/history'
+    | '/info'
     | '/login'
     | '/mysafa'
     | '/notifications'
     | '/pending'
+    | '/player'
     | '/profile'
     | '/register'
     | '/sponsors'
@@ -191,13 +224,16 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/admin'
     | '/coach-access'
     | '/fixtures'
     | '/history'
+    | '/info'
     | '/login'
     | '/mysafa'
     | '/notifications'
     | '/pending'
+    | '/player'
     | '/profile'
     | '/register'
     | '/sponsors'
@@ -209,13 +245,16 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
   CoachAccessRoute: typeof CoachAccessRoute
   FixturesRoute: typeof FixturesRoute
   HistoryRoute: typeof HistoryRoute
+  InfoRoute: typeof InfoRoute
   LoginRoute: typeof LoginRoute
   MysafaRoute: typeof MysafaRoute
   NotificationsRoute: typeof NotificationsRoute
   PendingRoute: typeof PendingRoute
+  PlayerRoute: typeof PlayerRoute
   ProfileRoute: typeof ProfileRoute
   RegisterRoute: typeof RegisterRoute
   SponsorsRoute: typeof SponsorsRoute
@@ -232,6 +271,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/coach-access': {
@@ -253,6 +299,13 @@ declare module '@tanstack/react-router' {
       path: '/history'
       fullPath: '/history'
       preLoaderRoute: typeof HistoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/info': {
+      id: '/info'
+      path: '/info'
+      fullPath: '/info'
+      preLoaderRoute: typeof InfoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -281,6 +334,13 @@ declare module '@tanstack/react-router' {
       path: '/pending'
       fullPath: '/pending'
       preLoaderRoute: typeof PendingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/player': {
+      id: '/player'
+      path: '/player'
+      fullPath: '/player'
+      preLoaderRoute: typeof PlayerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/profile': {
@@ -337,13 +397,16 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
   CoachAccessRoute: CoachAccessRoute,
   FixturesRoute: FixturesRoute,
   HistoryRoute: HistoryRoute,
+  InfoRoute: InfoRoute,
   LoginRoute: LoginRoute,
   MysafaRoute: MysafaRoute,
   NotificationsRoute: NotificationsRoute,
   PendingRoute: PendingRoute,
+  PlayerRoute: PlayerRoute,
   ProfileRoute: ProfileRoute,
   RegisterRoute: RegisterRoute,
   SponsorsRoute: SponsorsRoute,
