@@ -266,8 +266,12 @@ export function getLeague(slug: string) {
 export const nextFixture = leagues[2]!.fixtures[0]!;
 export const latestResult = leagues[2]!.results[0]!;
 
-export const allFixtures: (Fixture & { league: string })[] = leagues.flatMap((l) =>
-  l.fixtures.map((f) => ({ ...f, league: l.name })),
+export const allFixtures: (Fixture & { league: string; slug: string; accent: string })[] = leagues.flatMap((l) =>
+  l.fixtures.map((f) => ({ ...f, league: l.name, slug: l.slug, accent: l.accent })),
+);
+
+export const allResults: (Result & { league: string; slug: string; accent: string })[] = leagues.flatMap((l) =>
+  l.results.map((r) => ({ ...r, league: l.name, slug: l.slug, accent: l.accent })),
 );
 
 export const news = [
