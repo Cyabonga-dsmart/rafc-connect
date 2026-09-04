@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as CoachAccessRouteImport } from './routes/coach-access'
 import { Route as FixturesRouteImport } from './routes/fixtures'
 import { Route as HistoryRouteImport } from './routes/history'
+import { Route as InfoRouteImport } from './routes/info'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as MysafaRouteImport } from './routes/mysafa'
 import { Route as NotificationsRouteImport } from './routes/notifications'
@@ -44,6 +45,11 @@ const FixturesRoute = FixturesRouteImport.update({
 const HistoryRoute = HistoryRouteImport.update({
   id: '/history',
   path: '/history',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InfoRoute = InfoRouteImport.update({
+  id: '/info',
+  path: '/info',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -112,6 +118,7 @@ export interface FileRoutesByFullPath {
   '/coach-access': typeof CoachAccessRoute
   '/fixtures': typeof FixturesRoute
   '/history': typeof HistoryRoute
+  '/info': typeof InfoRoute
   '/login': typeof LoginRoute
   '/mysafa': typeof MysafaRoute
   '/notifications': typeof NotificationsRoute
@@ -130,6 +137,7 @@ export interface FileRoutesByTo {
   '/coach-access': typeof CoachAccessRoute
   '/fixtures': typeof FixturesRoute
   '/history': typeof HistoryRoute
+  '/info': typeof InfoRoute
   '/login': typeof LoginRoute
   '/mysafa': typeof MysafaRoute
   '/notifications': typeof NotificationsRoute
@@ -149,6 +157,7 @@ export interface FileRoutesById {
   '/coach-access': typeof CoachAccessRoute
   '/fixtures': typeof FixturesRoute
   '/history': typeof HistoryRoute
+  '/info': typeof InfoRoute
   '/login': typeof LoginRoute
   '/mysafa': typeof MysafaRoute
   '/notifications': typeof NotificationsRoute
@@ -169,6 +178,7 @@ export interface FileRouteTypes {
     | '/coach-access'
     | '/fixtures'
     | '/history'
+    | '/info'
     | '/login'
     | '/mysafa'
     | '/notifications'
@@ -187,6 +197,7 @@ export interface FileRouteTypes {
     | '/coach-access'
     | '/fixtures'
     | '/history'
+    | '/info'
     | '/login'
     | '/mysafa'
     | '/notifications'
@@ -205,6 +216,7 @@ export interface FileRouteTypes {
     | '/coach-access'
     | '/fixtures'
     | '/history'
+    | '/info'
     | '/login'
     | '/mysafa'
     | '/notifications'
@@ -224,6 +236,7 @@ export interface RootRouteChildren {
   CoachAccessRoute: typeof CoachAccessRoute
   FixturesRoute: typeof FixturesRoute
   HistoryRoute: typeof HistoryRoute
+  InfoRoute: typeof InfoRoute
   LoginRoute: typeof LoginRoute
   MysafaRoute: typeof MysafaRoute
   NotificationsRoute: typeof NotificationsRoute
@@ -266,6 +279,13 @@ declare module '@tanstack/react-router' {
       path: '/history'
       fullPath: '/history'
       preLoaderRoute: typeof HistoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/info': {
+      id: '/info'
+      path: '/info'
+      fullPath: '/info'
+      preLoaderRoute: typeof InfoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -360,6 +380,7 @@ const rootRouteChildren: RootRouteChildren = {
   CoachAccessRoute: CoachAccessRoute,
   FixturesRoute: FixturesRoute,
   HistoryRoute: HistoryRoute,
+  InfoRoute: InfoRoute,
   LoginRoute: LoginRoute,
   MysafaRoute: MysafaRoute,
   NotificationsRoute: NotificationsRoute,
