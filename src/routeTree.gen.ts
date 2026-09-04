@@ -17,6 +17,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as MysafaRouteImport } from './routes/mysafa'
 import { Route as NotificationsRouteImport } from './routes/notifications'
 import { Route as PendingRouteImport } from './routes/pending'
+import { Route as PlayerRouteImport } from './routes/player'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as SponsorsRouteImport } from './routes/sponsors'
@@ -65,6 +66,11 @@ const PendingRoute = PendingRouteImport.update({
   path: '/pending',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PlayerRoute = PlayerRouteImport.update({
+  id: '/player',
+  path: '/player',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProfileRoute = ProfileRouteImport.update({
   id: '/profile',
   path: '/profile',
@@ -110,6 +116,7 @@ export interface FileRoutesByFullPath {
   '/mysafa': typeof MysafaRoute
   '/notifications': typeof NotificationsRoute
   '/pending': typeof PendingRoute
+  '/player': typeof PlayerRoute
   '/profile': typeof ProfileRoute
   '/register': typeof RegisterRoute
   '/sponsors': typeof SponsorsRoute
@@ -127,6 +134,7 @@ export interface FileRoutesByTo {
   '/mysafa': typeof MysafaRoute
   '/notifications': typeof NotificationsRoute
   '/pending': typeof PendingRoute
+  '/player': typeof PlayerRoute
   '/profile': typeof ProfileRoute
   '/register': typeof RegisterRoute
   '/sponsors': typeof SponsorsRoute
@@ -145,6 +153,7 @@ export interface FileRoutesById {
   '/mysafa': typeof MysafaRoute
   '/notifications': typeof NotificationsRoute
   '/pending': typeof PendingRoute
+  '/player': typeof PlayerRoute
   '/profile': typeof ProfileRoute
   '/register': typeof RegisterRoute
   '/sponsors': typeof SponsorsRoute
@@ -164,6 +173,7 @@ export interface FileRouteTypes {
     | '/mysafa'
     | '/notifications'
     | '/pending'
+    | '/player'
     | '/profile'
     | '/register'
     | '/sponsors'
@@ -181,6 +191,7 @@ export interface FileRouteTypes {
     | '/mysafa'
     | '/notifications'
     | '/pending'
+    | '/player'
     | '/profile'
     | '/register'
     | '/sponsors'
@@ -198,6 +209,7 @@ export interface FileRouteTypes {
     | '/mysafa'
     | '/notifications'
     | '/pending'
+    | '/player'
     | '/profile'
     | '/register'
     | '/sponsors'
@@ -216,6 +228,7 @@ export interface RootRouteChildren {
   MysafaRoute: typeof MysafaRoute
   NotificationsRoute: typeof NotificationsRoute
   PendingRoute: typeof PendingRoute
+  PlayerRoute: typeof PlayerRoute
   ProfileRoute: typeof ProfileRoute
   RegisterRoute: typeof RegisterRoute
   SponsorsRoute: typeof SponsorsRoute
@@ -283,6 +296,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PendingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/player': {
+      id: '/player'
+      path: '/player'
+      fullPath: '/player'
+      preLoaderRoute: typeof PlayerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/profile': {
       id: '/profile'
       path: '/profile'
@@ -344,6 +364,7 @@ const rootRouteChildren: RootRouteChildren = {
   MysafaRoute: MysafaRoute,
   NotificationsRoute: NotificationsRoute,
   PendingRoute: PendingRoute,
+  PlayerRoute: PlayerRoute,
   ProfileRoute: ProfileRoute,
   RegisterRoute: RegisterRoute,
   SponsorsRoute: SponsorsRoute,
