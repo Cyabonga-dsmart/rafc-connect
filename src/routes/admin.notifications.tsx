@@ -21,7 +21,7 @@ export const Route = createFileRoute("/admin/notifications")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: AdminNotifications;
+  component: AdminNotifications,
 });
 
 const targets = ["All players", "By league", "Specific player"] as const;
