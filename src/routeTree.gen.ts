@@ -10,7 +10,6 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AdminRouteImport } from './routes/admin'
 import { Route as CoachAccessRouteImport } from './routes/coach-access'
 import { Route as FixturesRouteImport } from './routes/fixtures'
 import { Route as HistoryRouteImport } from './routes/history'
@@ -23,6 +22,7 @@ import { Route as PlayerRouteImport } from './routes/player'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as SponsorsRouteImport } from './routes/sponsors'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as CoachIndexRouteImport } from './routes/coach.index'
 import { Route as CoachIdRouteImport } from './routes/coach.$id'
 import { Route as LeaguesIndexRouteImport } from './routes/leagues.index'
@@ -31,11 +31,6 @@ import { Route as LeaguesSlugRouteImport } from './routes/leagues.$slug'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminRoute = AdminRouteImport.update({
-  id: '/admin',
-  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CoachAccessRoute = CoachAccessRouteImport.update({
@@ -98,6 +93,11 @@ const SponsorsRoute = SponsorsRouteImport.update({
   path: '/sponsors',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CoachIndexRoute = CoachIndexRouteImport.update({
   id: '/coach/',
   path: '/coach/',
@@ -121,7 +121,6 @@ const LeaguesSlugRoute = LeaguesSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
   '/coach-access': typeof CoachAccessRoute
   '/fixtures': typeof FixturesRoute
   '/history': typeof HistoryRoute
@@ -136,12 +135,12 @@ export interface FileRoutesByFullPath {
   '/sponsors': typeof SponsorsRoute
   '/coach/$id': typeof CoachIdRoute
   '/leagues/$slug': typeof LeaguesSlugRoute
+  '/admin/': typeof AdminIndexRoute
   '/coach/': typeof CoachIndexRoute
   '/leagues/': typeof LeaguesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
   '/coach-access': typeof CoachAccessRoute
   '/fixtures': typeof FixturesRoute
   '/history': typeof HistoryRoute
@@ -156,13 +155,13 @@ export interface FileRoutesByTo {
   '/sponsors': typeof SponsorsRoute
   '/coach/$id': typeof CoachIdRoute
   '/leagues/$slug': typeof LeaguesSlugRoute
+  '/admin': typeof AdminIndexRoute
   '/coach': typeof CoachIndexRoute
   '/leagues': typeof LeaguesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
   '/coach-access': typeof CoachAccessRoute
   '/fixtures': typeof FixturesRoute
   '/history': typeof HistoryRoute
@@ -177,6 +176,7 @@ export interface FileRoutesById {
   '/sponsors': typeof SponsorsRoute
   '/coach/$id': typeof CoachIdRoute
   '/leagues/$slug': typeof LeaguesSlugRoute
+  '/admin/': typeof AdminIndexRoute
   '/coach/': typeof CoachIndexRoute
   '/leagues/': typeof LeaguesIndexRoute
 }
@@ -184,7 +184,6 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/admin'
     | '/coach-access'
     | '/fixtures'
     | '/history'
@@ -199,12 +198,12 @@ export interface FileRouteTypes {
     | '/sponsors'
     | '/coach/$id'
     | '/leagues/$slug'
+    | '/admin/'
     | '/coach/'
     | '/leagues/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/admin'
     | '/coach-access'
     | '/fixtures'
     | '/history'
@@ -219,12 +218,12 @@ export interface FileRouteTypes {
     | '/sponsors'
     | '/coach/$id'
     | '/leagues/$slug'
+    | '/admin'
     | '/coach'
     | '/leagues'
   id:
     | '__root__'
     | '/'
-    | '/admin'
     | '/coach-access'
     | '/fixtures'
     | '/history'
@@ -239,13 +238,13 @@ export interface FileRouteTypes {
     | '/sponsors'
     | '/coach/$id'
     | '/leagues/$slug'
+    | '/admin/'
     | '/coach/'
     | '/leagues/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AdminRoute: typeof AdminRoute
   CoachAccessRoute: typeof CoachAccessRoute
   FixturesRoute: typeof FixturesRoute
   HistoryRoute: typeof HistoryRoute
@@ -260,6 +259,7 @@ export interface RootRouteChildren {
   SponsorsRoute: typeof SponsorsRoute
   CoachIdRoute: typeof CoachIdRoute
   LeaguesSlugRoute: typeof LeaguesSlugRoute
+  AdminIndexRoute: typeof AdminIndexRoute
   CoachIndexRoute: typeof CoachIndexRoute
   LeaguesIndexRoute: typeof LeaguesIndexRoute
 }
@@ -271,13 +271,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin': {
-      id: '/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/coach-access': {
@@ -364,6 +357,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SponsorsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/coach/': {
       id: '/coach/'
       path: '/coach'
@@ -397,7 +397,6 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AdminRoute: AdminRoute,
   CoachAccessRoute: CoachAccessRoute,
   FixturesRoute: FixturesRoute,
   HistoryRoute: HistoryRoute,
@@ -412,6 +411,7 @@ const rootRouteChildren: RootRouteChildren = {
   SponsorsRoute: SponsorsRoute,
   CoachIdRoute: CoachIdRoute,
   LeaguesSlugRoute: LeaguesSlugRoute,
+  AdminIndexRoute: AdminIndexRoute,
   CoachIndexRoute: CoachIndexRoute,
   LeaguesIndexRoute: LeaguesIndexRoute,
 }
