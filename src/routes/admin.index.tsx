@@ -4,7 +4,7 @@ import { BellPlus, CreditCard, FileCheck2, Users } from "lucide-react";
 import { PageHeader } from "@/components/ui-bits";
 import { submissions } from "@/data/submissions";
 
-export const Route = createFileRoute("/admin")({
+export const Route = createFileRoute("/admin/")({
   head: () => ({
     meta: [
       { title: "Admin Dashboard — RAFC" },
@@ -49,7 +49,7 @@ function Admin() {
       <section className="mt-6 space-y-2 px-5">
         <p className="eyebrow">Quick actions</p>
         <Link
-          to="/admin/notify"
+          to="/admin/notifications"
           className="cta-accent flex items-center justify-center gap-2 rounded-lg py-3.5 font-display text-sm uppercase tracking-[0.14em]"
         >
           <BellPlus className="h-4 w-4" /> Send notification

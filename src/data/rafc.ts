@@ -310,6 +310,10 @@ export const sponsors = [
   "Castaways",
   "Ecopest",
   "FBS",
+  "JAM",
+  "Vecchio",
+  "AquaMonkey",
+  "Gas Link",
 ];
 
 export type NotificationKind = "training" | "match" | "payment" | "news";
@@ -415,14 +419,14 @@ export const playerProfile = {
 };
 
 export const clubInfo = {
-  address: "Randburg Sports Complex, Hans Schoeman St, Ferndale, Randburg, 2194",
-  mapsUrl: "https://maps.google.com/?q=Randburg+Sports+Complex+Ferndale+Randburg",
+  address: "Randburg Stadium, Hans Schoeman St, Randburg, 2194",
+  mapsUrl: "https://maps.google.com/?q=Randburg+Stadium+Hans+Schoeman+St+Randburg+2194",
   trainingGround: {
     name: "Ferndale Astro & Field 3",
     detail: "Floodlit astro plus two grass pitches. Gates open 16:00 on weekdays.",
   },
-  email: "info@randburgafc.co.za",
-  phone: "+27 11 789 4410",
+  email: "admin@randburgfootballclub.co.za",
+  phone: "+27 11 000 0000",
   committee: [
     { role: "Chairperson", name: "Sizwe Mahlangu" },
     { role: "Vice chairperson", name: "Dean Roberts" },
