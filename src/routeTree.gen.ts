@@ -24,6 +24,7 @@ import { Route as RegisterRouteImport } from './routes/register'
 import { Route as SponsorsRouteImport } from './routes/sponsors'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminNotificationsRouteImport } from './routes/admin.notifications'
+import { Route as AdminPaymentsRouteImport } from './routes/admin.payments'
 import { Route as CoachIndexRouteImport } from './routes/coach.index'
 import { Route as CoachIdRouteImport } from './routes/coach.$id'
 import { Route as LeaguesIndexRouteImport } from './routes/leagues.index'
@@ -104,6 +105,11 @@ const AdminNotificationsRoute = AdminNotificationsRouteImport.update({
   path: '/admin/notifications',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminPaymentsRoute = AdminPaymentsRouteImport.update({
+  id: '/admin/payments',
+  path: '/admin/payments',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CoachIndexRoute = CoachIndexRouteImport.update({
   id: '/coach/',
   path: '/coach/',
@@ -140,6 +146,7 @@ export interface FileRoutesByFullPath {
   '/register': typeof RegisterRoute
   '/sponsors': typeof SponsorsRoute
   '/admin/notifications': typeof AdminNotificationsRoute
+  '/admin/payments': typeof AdminPaymentsRoute
   '/coach/$id': typeof CoachIdRoute
   '/leagues/$slug': typeof LeaguesSlugRoute
   '/admin/': typeof AdminIndexRoute
@@ -161,6 +168,7 @@ export interface FileRoutesByTo {
   '/register': typeof RegisterRoute
   '/sponsors': typeof SponsorsRoute
   '/admin/notifications': typeof AdminNotificationsRoute
+  '/admin/payments': typeof AdminPaymentsRoute
   '/coach/$id': typeof CoachIdRoute
   '/leagues/$slug': typeof LeaguesSlugRoute
   '/admin': typeof AdminIndexRoute
@@ -183,6 +191,7 @@ export interface FileRoutesById {
   '/register': typeof RegisterRoute
   '/sponsors': typeof SponsorsRoute
   '/admin/notifications': typeof AdminNotificationsRoute
+  '/admin/payments': typeof AdminPaymentsRoute
   '/coach/$id': typeof CoachIdRoute
   '/leagues/$slug': typeof LeaguesSlugRoute
   '/admin/': typeof AdminIndexRoute
@@ -206,6 +215,7 @@ export interface FileRouteTypes {
     | '/register'
     | '/sponsors'
     | '/admin/notifications'
+    | '/admin/payments'
     | '/coach/$id'
     | '/leagues/$slug'
     | '/admin/'
@@ -227,6 +237,7 @@ export interface FileRouteTypes {
     | '/register'
     | '/sponsors'
     | '/admin/notifications'
+    | '/admin/payments'
     | '/coach/$id'
     | '/leagues/$slug'
     | '/admin'
@@ -248,6 +259,7 @@ export interface FileRouteTypes {
     | '/register'
     | '/sponsors'
     | '/admin/notifications'
+    | '/admin/payments'
     | '/coach/$id'
     | '/leagues/$slug'
     | '/admin/'
@@ -270,6 +282,7 @@ export interface RootRouteChildren {
   RegisterRoute: typeof RegisterRoute
   SponsorsRoute: typeof SponsorsRoute
   AdminNotificationsRoute: typeof AdminNotificationsRoute
+  AdminPaymentsRoute: typeof AdminPaymentsRoute
   CoachIdRoute: typeof CoachIdRoute
   LeaguesSlugRoute: typeof LeaguesSlugRoute
   AdminIndexRoute: typeof AdminIndexRoute
@@ -384,6 +397,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminNotificationsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/payments': {
+      id: '/admin/payments'
+      path: '/admin/payments'
+      fullPath: '/admin/payments'
+      preLoaderRoute: typeof AdminPaymentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/coach/': {
       id: '/coach/'
       path: '/coach'
@@ -430,6 +450,7 @@ const rootRouteChildren: RootRouteChildren = {
   RegisterRoute: RegisterRoute,
   SponsorsRoute: SponsorsRoute,
   AdminNotificationsRoute: AdminNotificationsRoute,
+  AdminPaymentsRoute: AdminPaymentsRoute,
   CoachIdRoute: CoachIdRoute,
   LeaguesSlugRoute: LeaguesSlugRoute,
   AdminIndexRoute: AdminIndexRoute,
