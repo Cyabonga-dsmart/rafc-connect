@@ -52,7 +52,7 @@ export const submissions: Submission[] = [
   {
     id: "s3",
     player: "Ruan Pretorius",
-    league: "Championship",
+    league: "Championship League",
     accent: "#0F766E",
     status: "docs pending",
     physicalDocsOutstanding: true,
